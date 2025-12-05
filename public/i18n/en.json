@@ -39,6 +39,31 @@
         "frontend": "Frontend",
         "backend": "Backend",
         "tools": "Tools"
+      },
+      "items": {
+        "frontend": {
+          "htmlCss": "HTML5, CSS3",
+          "frameworks": "Bootstrap, Tailwind CSS",
+          "languages": "JavaScript, TypeScript",
+          "frameworks2": "Vue.js, Web Components",
+          "mobile": "Nativescript, Flutter, Avalonia UI"
+        },
+        "backend": {
+          "nodejs": "Node.js, Express",
+          "dotnet": "ASP.NET Core, C#",
+          "python": "Python, Flask",
+          "go": "Go, PocketBase",
+          "databases": "PostgreSQL and other Relational Databases"
+        },
+        "tools": {
+          "git": "Git",
+          "docker": "Docker",
+          "bundlers": "Bundlers: Webpack, Parcel, Vite",
+          "terminal": "Terminal: Linux Bash, PowerShell",
+          "codingAgents": "Coding Agents: Claude Code, Open Code",
+          "presentations": "Presentations: PowerPoint, Google Slides, Gamma, Canva",
+          "editors": "Text Editors: Visual Studio Code, Zed"
+        }
       }
     },
     "contact": {

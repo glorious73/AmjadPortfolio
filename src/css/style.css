@@ -139,10 +139,6 @@ body {
   direction: rtl;
 }
 
-[dir="rtl"] .contact-item {
-  flex-direction: row-reverse;
-}
-
 [dir="rtl"] .project-tags {
   flex-direction: row-reverse;
 }
