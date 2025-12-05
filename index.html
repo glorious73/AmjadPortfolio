@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Your Name - Portfolio</title>
+  <meta name="description" data-i18n="meta.description" content="Portfolio of Your Name, Web Developer">
+  
+</head>
+<body>
+  <div class="app">
+    {{> sidebar}}
+    {{> mobile-nav}}
+    
+    <main class="main-content">
+      {{> home}}
+      {{> about}}
+      {{> projects}}
+      {{> skills}}
+      {{> contact}}
+    </main>
+    
+    {{> bottom-nav}}
+  </div>
+  
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

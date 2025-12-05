@@ -1,0 +1,57 @@
+{
+  "name": "Amjad Abujamous",
+  "title": "Software Engineer",
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact"
+  },
+  "sections": {
+    "home": {
+      "title": "Welcome",
+      "description": "This is Amjad, a passionate software engineer with the aim of creating reliable and clean solutions that turn creative ideas into reality. He can best contribute in understanding the products to be delivered and the business processes around them, and then draft the procedures and design and implement the software that is needed to create and support them. Furthermore, he has good experience with JavaScript, Python, and the .NET framework as well as a solid understanding of Scrum, Waterfall, and the different types of SDLC."
+    },
+    "about": {
+      "title": "About",
+      "description1": "The Chief Technology Officer of Edama Solutions. He is a passionate and capable software engineer who aims to create reliable and dependable solutions that enable private and government organizations to manage their businesses. He has participated in building impactful technology projects, products, websites, and applications for several organizations, including Al Rajhi Bank, Geidea, and others.",
+      "description2": "Also, he has taken part of competitions and business accelerators, such as the Taqaddam Business Accelerator at King Abdullah University of Science and Technology. He also has experience in product management and decision-making, which maximizes his influence within the organization."
+    },
+    "projects": {
+      "title": "Projects",
+      "project1": {
+        "title": "Geidea Partner Portal",
+        "description": "A portal which allowed the sales team in Geidea to manage and track their partnerships effectively."
+      },
+      "project2": {
+        "title": "Al Rajhi Bank Contact Center Dashboard",
+        "description": "A dashboard that provided real-time insights and analytics for the contact center operations of Al Rajhi Bank, allowing the team to catch issues and fix them instantly before reaching the end customer."
+      },
+      "project3": {
+        "title": "Edama Tech",
+        "description": "An Internal Audit automation system which allows an organization to manage risks, compliance, and internal controls efficiently. It also allows auditors to plan, execute, and report on audits effectively in a near instant time."
+      }
+    },
+    "skills": {
+      "title": "Skills",
+      "categories": {
+        "frontend": "Frontend",
+        "backend": "Backend",
+        "tools": "Tools"
+      }
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "You're welcome to reach out to me for collaboration, consulting, academic research, and software development.",
+      "email": "amjadmh73@gmail.com",
+      "phone": "+966 531 577 381",
+      "linkedin": "https://linkedin.com/in/amjadaj-se",
+      "github": "https://github.com/glorious73"
+    }
+  },
+  "meta": {
+    "title": "Amjad Abujamous - Portfolio",
+    "description": "Portfolio of Amjad Abujamous, Software Engineer"
+  }
+}
