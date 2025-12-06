@@ -4,6 +4,7 @@
   "navigation": {
     "home": "Home",
     "about": "About",
+    "education": "Education",
     "projects": "Projects",
     "skills": "Skills",
     "contact": "Contact"
@@ -17,6 +18,27 @@
       "title": "About",
       "description1": "The Chief Technology Officer of Edama Solutions. He is a passionate and capable software engineer who aims to create reliable and dependable solutions that enable private and government organizations to manage their businesses. He has participated in building impactful technology projects, products, websites, and applications for several organizations, including Al Rajhi Bank, Geidea, and others.",
       "description2": "Also, he has taken part of competitions and business accelerators, such as the Taqaddam Business Accelerator at King Abdullah University of Science and Technology. He also has experience in product management and decision-making, which maximizes his influence within the organization."
+    },
+    "education": {
+      "title": "Education",
+      "degree": "Bachelor of Science in Software Engineering",
+      "university": "Alfaisal University- Riyadh, KSA",
+      "duration": "2015 - 2019",
+      "relevantCourses": {
+        "title": "Relevant Courses",
+        "courses": [
+          "Data Structures and Algorithms",
+          "Database Systems",
+          "Software Project Management",
+          "Web Development",
+          "Mobile Application Development",
+          "Cloud Computing",
+          "Computer Architecture",
+          "Computer Networks",
+          "Cyber Security",
+          "Internet of Things"
+        ]
+      }
     },
     "projects": {
       "title": "Projects",
@@ -72,7 +94,9 @@
       "email": "amjadmh73@gmail.com",
       "phone": "+966 531 577 381",
       "linkedin": "https://linkedin.com/in/amjadaj-se",
-      "github": "https://github.com/glorious73"
+      "github": "https://github.com/glorious73",
+      "devto": "https://dev.to/amjadmh73",
+      "stackoverflow": "https://stackoverflow.com/users/6336270/amjad-abujamous"
     }
   },
   "meta": {

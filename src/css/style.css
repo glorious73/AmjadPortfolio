@@ -1,3 +1,29 @@
+:root {
+  --bg-primary: #f4f4f4;
+  --bg-secondary: #ffffff;
+  --text-primary: #333333;
+  --text-secondary: #495057;
+  --text-muted: #6c757d;
+  --border-color: #e9ecef;
+  --sidebar-bg: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  --sidebar-text: #ffffff;
+  --accent-color: #667eea;
+  --card-bg: #f8f9fa;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --text-primary: #ffffff;
+  --text-secondary: #e9ecef;
+  --text-muted: #adb5bd;
+  --border-color: #495057;
+  --sidebar-bg: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+  --sidebar-text: #ffffff;
+  --accent-color: #818cf8;
+  --card-bg: #343a40;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,8 +33,9 @@
 body {
   font-family: 'Arial', sans-serif;
   line-height: 1.6;
-  color: #333;
-  background-color: #f4f4f4;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .app {
@@ -19,8 +46,8 @@ body {
 /* Sidebar Styles */
 .sidebar {
   width: 280px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-  color: white;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
   padding: 2rem;
   position: fixed;
   height: 100vh;
@@ -84,6 +111,43 @@ body {
 
 .nav-link:hover {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Theme Switcher */
+.theme-switcher {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theme-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--sidebar-text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.theme-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.theme-icon {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.theme-btn:hover .theme-icon {
+  transform: scale(1.1);
 }
 
 /* Language Switcher */
@@ -152,15 +216,16 @@ body {
 
 .section {
   margin-bottom: 4rem;
-  background: white;
+  background: var(--bg-secondary);
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
 }
 
 .section h1, .section h2 {
   margin-bottom: 1.5rem;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .section h1 {
@@ -180,15 +245,16 @@ body {
 }
 
 .project-card {
-  background: #f8f9fa;
+  background: var(--card-bg);
   padding: 1.5rem;
   border-radius: 8px;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .project-card h3 {
   margin-bottom: 1rem;
-  color: #495057;
+  color: var(--text-secondary);
 }
 
 .project-tags {
@@ -216,7 +282,7 @@ body {
 
 .skill-category h3 {
   margin-bottom: 1rem;
-  color: #495057;
+  color: var(--text-secondary);
 }
 
 .skill-category ul {
@@ -225,7 +291,70 @@ body {
 
 .skill-category li {
   padding: 0.5rem 0;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Education Section */
+.education-item {
+  margin-top: 2rem;
+}
+
+.education-header {
+  margin-bottom: 2rem;
+}
+
+.education-header h3 {
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.education-meta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.university {
+  font-weight: 500;
+}
+
+.duration {
+  opacity: 0.8;
+}
+
+.relevant-courses h4 {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.course-item {
+  background: var(--card-bg);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.course-item:hover {
+  background: var(--border-color);
+  transform: translateY(-2px);
+}
+
+/* RTL Support for Education */
+[dir="rtl"] .courses-grid {
+  direction: rtl;
 }
 
 /* Contact Info */
@@ -239,19 +368,20 @@ body {
   gap: 1rem;
   margin-bottom: 1rem;
   padding: 0.75rem;
-  background: #f8f9fa;
+  background: var(--card-bg);
   border-radius: 8px;
+  transition: background-color 0.3s ease;
 }
 
 .contact-link {
-  color: #1a1a1a;
+  color: var(--text-primary);
   text-decoration: none;
   transition: color 0.3s ease;
   flex: 1;
 }
 
 .contact-link:hover {
-  color: #667eea;
+  color: var(--accent-color);
   text-decoration: underline;
 }
 
@@ -262,14 +392,15 @@ body {
 /* Mobile Navigation */
 .mobile-nav {
   display: none;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-  color: white;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
   padding: 1rem;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+  transition: background 0.3s ease;
 }
 
 .mobile-nav-header {
@@ -336,6 +467,34 @@ body {
   display: block;
 }
 
+/* Mobile Theme Switcher */
+.mobile-theme-switcher {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-theme-switcher .theme-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--sidebar-text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.mobile-theme-switcher .theme-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
 /* Bottom Navigation */
 .bottom-nav {
   display: none;
@@ -343,10 +502,11 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: white;
-  border-top: 1px solid #e9ecef;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
   padding: 0.5rem 0;
   z-index: 999;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .bottom-nav-item {
@@ -355,7 +515,7 @@ body {
   align-items: center;
   padding: 0.5rem;
   text-decoration: none;
-  color: #1a1a1a;
+  color: var(--text-primary);
   font-size: 0.8rem;
   flex: 1;
 }
