@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Amjad Abujamous - Blog</title>
+  <meta name="description" data-i18n="meta.description" content="Blog of Amjad Abujamous, Software Engineer">
+
+  <!-- SEO Meta Tags -->
+  <meta name="keywords" content="Amjad Abujamous, software engineer, blog, tech blog, programming, web development">
+  <meta name="author" content="Amjad Abujamous">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://glorious73.netlify.app/blog.html">
+  <meta property="og:title" content="Amjad Abujamous - Blog">
+  <meta property="og:description" content="Technical blog posts by Amjad Abujamous">
+  <meta property="og:image" content="https://glorious73.netlify.app/profile/amjad%20profile%20pic.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://glorious73.netlify.app/blog.html">
+  <meta property="twitter:title" content="Amjad Abujamous - Blog">
+  <meta property="twitter:description" content="Technical blog posts by Amjad Abujamous">
+  <meta property="twitter:image" content="https://glorious73.netlify.app/profile/amjad%20profile%20pic.png">
+
+  <link rel="canonical" href="https://glorious73.netlify.app/blog.html">
+  <meta name="theme-color" content="#1a1a1a">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Quill Snow Theme for Blog Post Rendering -->
+  <link href="https://cdn.quilljs.com/2.0.3/quill.snow.css" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    {{> sidebar}}
+    {{> mobile-nav}}
+
+    <main class="main-content">
+      {{> blog-post}}
+    </main>
+
+    {{> bottom-nav}}
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -7,6 +7,7 @@
     "education": "التعليم",
     "projects": "المشاريع",
     "skills": "المهارات",
+    "blog": "المدونة",
     "contact": "التواصل"
   },
   "sections": {
@@ -98,6 +99,27 @@
       "devto": "https://dev.to/amjadmh73",
       "stackoverflow": "https://stackoverflow.com/users/6336270/amjad-abujamous"
     }
+  },
+  "blog": {
+    "filters": {
+      "all": "الكل",
+      "english": "الإنجليزية",
+      "arabic": "العربية"
+    },
+    "loading": "جاري تحميل المقالات...",
+    "loadingPost": "جاري تحميل المقال...",
+    "error": "فشل تحميل المقالات. يرجى المحاولة مرة أخرى لاحقاً.",
+    "retry": "إعادة المحاولة",
+    "noPosts": "لا توجد مقالات.",
+    "postNotFound": "المقال غير موجود",
+    "postNotFoundDesc": "المقال الذي تبحث عنه غير موجود أو تم حذفه.",
+    "backToHome": "العودة للرئيسية",
+    "backToBlog": "العودة للمدونة",
+    "originallyPublished": "نُشر في الأصل",
+    "originallyPublishedOn": "نُشر في الأصل على",
+    "on": "في",
+    "lastUpdated": "آخر تحديث",
+    "loadMore": "المزيد"
   },
   "meta": {
     "title": "أمجد أبو جاموس - معرض الأعمال",

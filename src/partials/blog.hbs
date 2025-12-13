@@ -1,0 +1,45 @@
+<section id="blog" class="section">
+  <div class="container">
+    <h2 class="section-title" data-i18n="navigation.blog">Blog</h2>
+
+    <!-- Language/Tag Filter Tabs -->
+    <div class="blog-filters">
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all" data-i18n="blog.filters.all">All</button>
+        <button class="filter-btn" data-filter="en" data-i18n="blog.filters.english">English</button>
+        <button class="filter-btn" data-filter="ar" data-i18n="blog.filters.arabic">Arabic</button>
+      </div>
+
+      <div class="tags-container" id="tagsContainer">
+        <!-- Tags will be dynamically populated -->
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="blogLoading" class="blog-loading" style="display: none;">
+      <div class="spinner"></div>
+      <p data-i18n="blog.loading">Loading posts...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="blogError" class="blog-error" style="display: none;">
+      <p data-i18n="blog.error">Failed to load posts. Please try again later.</p>
+      <button id="retryBtn" class="btn-primary" data-i18n="blog.retry">Retry</button>
+    </div>
+
+    <!-- Blog Posts Grid -->
+    <div id="blogPosts" class="blog-grid">
+      <!-- Posts will be dynamically populated -->
+    </div>
+
+    <!-- No Posts Message -->
+    <div id="noPosts" class="no-posts" style="display: none;">
+      <p data-i18n="blog.noPosts">No posts found.</p>
+    </div>
+
+    <!-- Load More Button -->
+    <div id="loadMoreContainer" class="load-more-container" style="display: none;">
+      <button id="loadMoreBtn" class="btn-primary" data-i18n="blog.loadMore">Load More</button>
+    </div>
+  </div>
+</section>

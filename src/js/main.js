@@ -24,16 +24,24 @@ document.addEventListener('DOMContentLoaded', function() {
   const navLinks = document.querySelectorAll('.nav-link, .bottom-nav-item');
   navLinks.forEach(link => {
     link.addEventListener('click', function(e) {
-      e.preventDefault();
       const targetId = this.getAttribute('href');
       if (targetId.startsWith('#')) {
         const targetElement = document.querySelector(targetId);
+
+        // If on blog.html and target doesn't exist, redirect to index.html
+        if (!targetElement && window.location.pathname.includes('blog.html')) {
+          window.location.href = '/' + targetId;
+          return;
+        }
+
+        // If target exists on current page, smooth scroll
         if (targetElement) {
+          e.preventDefault();
           targetElement.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
           });
-          
+
           // Close mobile nav if open
           if (mobileNavPanel && mobileNavPanel.classList.contains('active')) {
             mobileNavPanel.classList.remove('active');

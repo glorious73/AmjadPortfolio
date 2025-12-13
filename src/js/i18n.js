@@ -31,26 +31,46 @@ function updateTranslations() {
 }
 
 // Language switcher
-function createLanguageSwitcher() {
+async function createLanguageSwitcher() {
   const switcher = document.createElement('div');
   switcher.className = 'language-switcher';
-  switcher.innerHTML = `
-    <button class="lang-btn ${window.appState.currentLanguage === 'en' ? 'active' : ''}" data-lang="en">EN</button>
-    <button class="lang-btn ${window.appState.currentLanguage === 'ar' ? 'active' : ''}" data-lang="ar">AR</button>
-  `;
-  
+
+  // Fetch flag SVGs
+  try {
+    const [usFlagResponse, arabFlagResponse] = await Promise.all([
+      fetch('/flags/Flag_of_the_United_States.svg'),
+      fetch('/flags/Flag_of_the_Arab_League.svg')
+    ]);
+
+    const usFlagSvg = await usFlagResponse.text();
+    const arabFlagSvg = await arabFlagResponse.text();
+
+    switcher.innerHTML = `
+      <button class="lang-btn ${window.appState.currentLanguage === 'en' ? 'active' : ''}" data-lang="en">${usFlagSvg}</button>
+      <button class="lang-btn ${window.appState.currentLanguage === 'ar' ? 'active' : ''}" data-lang="ar">${arabFlagSvg}</button>
+    `;
+  } catch (error) {
+    console.error('Failed to load flag SVGs:', error);
+    // Fallback to text if SVGs fail to load
+    switcher.innerHTML = `
+      <button class="lang-btn ${window.appState.currentLanguage === 'en' ? 'active' : ''}" data-lang="en">EN</button>
+      <button class="lang-btn ${window.appState.currentLanguage === 'ar' ? 'active' : ''}" data-lang="ar">AR</button>
+    `;
+  }
+
   switcher.addEventListener('click', async (e) => {
-    if (e.target.classList.contains('lang-btn')) {
-      const lang = e.target.getAttribute('data-lang');
+    if (e.target.classList.contains('lang-btn') || e.target.closest('.lang-btn')) {
+      const button = e.target.classList.contains('lang-btn') ? e.target : e.target.closest('.lang-btn');
+      const lang = button.getAttribute('data-lang');
       await window.appState.changeLanguage(lang);
-      
+
       // Update active button
       switcher.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
       });
     }
   });
-  
+
   return switcher;
 }
 
@@ -58,26 +78,26 @@ function createLanguageSwitcher() {
 document.addEventListener('DOMContentLoaded', async () => {
   // Initialize app state
   await window.appState.initialize();
-  
+
   // Subscribe to state changes
   window.appState.subscribe(() => {
     updateTranslations();
   });
-  
+
   // Initial translation update
   updateTranslations();
-  
+
   // Add language switcher to sidebar
   const sidebar = document.querySelector('.sidebar-content');
   if (sidebar) {
-    const switcher = createLanguageSwitcher();
+    const switcher = await createLanguageSwitcher();
     sidebar.appendChild(switcher);
   }
-  
+
   // Add language switcher to mobile nav panel
   const mobileNavPanel = document.querySelector('.mobile-nav-panel');
   if (mobileNavPanel) {
-    const switcher = createLanguageSwitcher();
+    const switcher = await createLanguageSwitcher();
     mobileNavPanel.appendChild(switcher);
   }
 });

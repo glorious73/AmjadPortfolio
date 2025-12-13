@@ -1,0 +1,19 @@
+<article id="blogPostContent" class="blog-post-container">
+  <!-- Loading State -->
+  <div id="postLoading" class="post-loading">
+    <div class="spinner"></div>
+    <p data-i18n="blog.loadingPost">Loading post...</p>
+  </div>
+
+  <!-- Error State -->
+  <div id="postError" class="post-error" style="display: none;">
+    <h2 data-i18n="blog.postNotFound">Post not found</h2>
+    <p data-i18n="blog.postNotFoundDesc">The post you're looking for doesn't exist or has been removed.</p>
+    <a href="/" class="btn-primary" data-i18n="blog.backToHome">Back to Home</a>
+  </div>
+
+  <!-- Post Content (populated dynamically) -->
+  <div id="postContent" style="display: none;">
+    <!-- Content will be populated by JavaScript -->
+  </div>
+</article>

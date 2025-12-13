@@ -1,0 +1,82 @@
+# Netlify Configuration for Portfolio with Blog
+# Note: This is for manual deployments only (no build commands)
+
+# Redirect rules for clean URLs and SPA behavior
+[[redirects]]
+  # Redirect root to index.html
+  from = "/"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  # Handle blog posts with query parameters
+  from = "/blog.html"
+  to = "/blog.html"
+  status = 200
+
+[[redirects]]
+  # Handle any other routes - redirect to index with hash
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Cache control for static assets
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    # Don't cache HTML files
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    # Don't cache service worker
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Specific redirects for common routes
+[[redirects]]
+  from = "/home"
+  to = "/#home"
+  status = 301
+
+[[redirects]]
+  from = "/about"
+  to = "/#about"
+  status = 301
+
+[[redirects]]
+  from = "/projects"
+  to = "/#projects"
+  status = 301
+
+[[redirects]]
+  from = "/skills"
+  to = "/#skills"
+  status = 301
+
+[[redirects]]
+  from = "/education"
+  to = "/#education"
+  status = 301
+
+[[redirects]]
+  from = "/blog"
+  to = "/#blog"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/#contact"
+  status = 301
