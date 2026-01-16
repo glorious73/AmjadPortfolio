@@ -1,27 +1,27 @@
-<nav class="sidebar">
+<nav class="sidebar" role="navigation" aria-label="Main navigation">
   <div class="sidebar-content">
     <div class="profile-section">
       <div class="profile-image">
-        <img src="/profile/amjad profile pic bw.png" alt="Profile Picture" />
+        <img src="/profile/amjad profile pic.png" alt="Amjad Abujamous - Software Engineer" loading="eager" decoding="async" />
       </div>
       <h2 data-i18n="name">Your Name</h2>
       <p class="title" data-i18n="title">Web Developer</p>
     </div>
-    
-    <ul class="nav-menu">
-      <li><a href="#home" class="nav-link" data-i18n="navigation.home">Home</a></li>
-      <li><a href="#about" class="nav-link" data-i18n="navigation.about">About</a></li>
-      <li><a href="#education" class="nav-link" data-i18n="navigation.education">Education</a></li>
-      <li><a href="#projects" class="nav-link" data-i18n="navigation.projects">Projects</a></li>
-      <li><a href="#skills" class="nav-link" data-i18n="navigation.skills">Skills</a></li>
-      <li><a href="#blog" class="nav-link" data-i18n="navigation.blog">Blog</a></li>
-      <li><a href="#contact" class="nav-link" data-i18n="navigation.contact">Contact</a></li>
+
+    <ul class="nav-menu" role="list">
+      <li><a href="#home" class="nav-link" data-i18n="navigation.home" aria-label="Navigate to Home section">Home</a></li>
+      <li><a href="#about" class="nav-link" data-i18n="navigation.about" aria-label="Navigate to About section">About</a></li>
+      <li><a href="#education" class="nav-link" data-i18n="navigation.education" aria-label="Navigate to Education section">Education</a></li>
+      <li><a href="#projects" class="nav-link" data-i18n="navigation.projects" aria-label="Navigate to Projects section">Projects</a></li>
+      <li><a href="#skills" class="nav-link" data-i18n="navigation.skills" aria-label="Navigate to Skills section">Skills</a></li>
+      <li><a href="#blog" class="nav-link" data-i18n="navigation.blog" aria-label="Navigate to Blog section">Blog</a></li>
+      <li><a href="#contact" class="nav-link" data-i18n="navigation.contact" aria-label="Navigate to Contact section">Contact</a></li>
     </ul>
-    
+
     <!-- Theme Switcher -->
-    <div class="theme-switcher">
-      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
-        <span class="theme-icon">🌙</span>
+    <div class="theme-switcher" role="group" aria-label="Theme settings">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle between light and dark theme" aria-pressed="false">
+        <span class="theme-icon" aria-hidden="true">🌙</span>
         <span class="theme-text">Dark</span>
       </button>
     </div>

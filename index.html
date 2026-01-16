@@ -108,31 +108,171 @@
   }
   </script>
   
-  <!-- Frans Wahyu https://www.flaticon.com/free-icons/programming-language -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <!-- Favicon - Frans Wahyu https://www.flaticon.com/free-icons/programming-language -->
+  <!-- Standard Favicons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+
+  <!-- Apple Touch Icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon.png">
+
+  <!-- Android Chrome Icons -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+
+  <!-- Microsoft Tiles -->
+  <meta name="msapplication-TileImage" content="/android-chrome-192x192.png">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+
+  <!-- Safari Pinned Tab -->
+  <link rel="mask-icon" href="/favicon.ico" color="#1a1a1a">
+
+  <!-- PWA Manifest -->
   <link rel="manifest" href="/site.webmanifest">
+
+  <!-- iOS Web App -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Amjad Portfolio">
 
   <!-- Quill Snow Theme for Blog Post Rendering -->
   <link href="https://cdn.quilljs.com/2.0.3/quill.snow.css" rel="stylesheet">
 
-  <!-- FOUC Prevention - Hide content initially, allow crawlers to see content -->
+  <!-- FOUC Prevention & Loading Screen Styles -->
   <style id="initialStyles">
     body.loading .app {
       opacity: 0;
+      visibility: hidden;
     }
-    body.loading {
-      background-color: #1a1a1a;
+
+    /* Professional Loading Screen */
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .page-loader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-content {
+      text-align: center;
+    }
+
+    /* Code brackets animation */
+    .loader-brackets {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #A85751;
+    }
+
+    .bracket {
+      animation: bracket-pulse 1.5s ease-in-out infinite;
+    }
+
+    .bracket:first-child {
+      animation-delay: 0s;
+    }
+
+    .bracket:last-child {
+      animation-delay: 0.75s;
+    }
+
+    .loader-dots {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .loader-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #C96B64;
+      border-radius: 50%;
+      animation: dot-bounce 1.4s ease-in-out infinite;
+    }
+
+    .loader-dot:nth-child(1) { animation-delay: 0s; }
+    .loader-dot:nth-child(2) { animation-delay: 0.2s; }
+    .loader-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    .loader-text {
+      margin-top: 1.5rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    @keyframes bracket-pulse {
+      0%, 100% {
+        opacity: 0.4;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+    }
+
+    @keyframes dot-bounce {
+      0%, 80%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+      }
+      40% {
+        transform: translateY(-10px);
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body class="loading">
+  <!-- Skip to main content link for keyboard users -->
+  <a href="#home" class="skip-link">Skip to main content</a>
+
+  <!-- Professional Loading Screen -->
+  <div class="page-loader" id="pageLoader" role="status" aria-live="polite" aria-label="Loading page">
+    <div class="loader-content">
+      <div class="loader-brackets">
+        <span class="bracket">&lt;/</span>
+        <div class="loader-dots">
+          <span class="loader-dot"></span>
+          <span class="loader-dot"></span>
+          <span class="loader-dot"></span>
+        </div>
+        <span class="bracket">&gt;</span>
+      </div>
+      <p class="loader-text">Loading</p>
+    </div>
+  </div>
+
   <div class="app">
     {{> sidebar}}
     {{> mobile-nav}}
     
-    <main class="main-content">
+    <main class="main-content" id="main-content" role="main">
       {{> home}}
       {{> about}}
       {{> education}}

@@ -1,36 +1,36 @@
-<nav class="mobile-nav">
+<nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
   <div class="mobile-nav-header">
     <div class="mobile-nav-profile">
       <div class="mobile-profile-image">
-        <img src="/profile/amjad profile pic bw.png" alt="Profile Picture" />
+        <img src="/profile/amjad profile pic.png" alt="Amjad Abujamous - Software Engineer" loading="eager" decoding="async" />
       </div>
       <div>
         <h2 data-i18n="name">Amjad Abujamous</h2>
         <p class="title" data-i18n="title">Software Engineer</p>
       </div>
     </div>
-    <button class="burger-menu" id="burgerMenu">
-      <span></span>
-      <span></span>
-      <span></span>
+    <button class="burger-menu" id="burgerMenu" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileNavPanel">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
     </button>
   </div>
-  
-  <div class="mobile-nav-panel" id="mobileNavPanel">
-    <ul class="nav-menu">
-      <li><a href="#home" class="nav-link" data-i18n="navigation.home">Home</a></li>
-      <li><a href="#about" class="nav-link" data-i18n="navigation.about">About</a></li>
-      <li><a href="#education" class="nav-link" data-i18n="navigation.education">Education</a></li>
-      <li><a href="#projects" class="nav-link" data-i18n="navigation.projects">Projects</a></li>
-      <li><a href="#skills" class="nav-link" data-i18n="navigation.skills">Skills</a></li>
-      <li><a href="#blog" class="nav-link" data-i18n="navigation.blog">Blog</a></li>
-      <li><a href="#contact" class="nav-link" data-i18n="navigation.contact">Contact</a></li>
+
+  <div class="mobile-nav-panel" id="mobileNavPanel" aria-hidden="true">
+    <ul class="nav-menu" role="list">
+      <li><a href="#home" class="nav-link" data-i18n="navigation.home" aria-label="Navigate to Home section">Home</a></li>
+      <li><a href="#about" class="nav-link" data-i18n="navigation.about" aria-label="Navigate to About section">About</a></li>
+      <li><a href="#education" class="nav-link" data-i18n="navigation.education" aria-label="Navigate to Education section">Education</a></li>
+      <li><a href="#projects" class="nav-link" data-i18n="navigation.projects" aria-label="Navigate to Projects section">Projects</a></li>
+      <li><a href="#skills" class="nav-link" data-i18n="navigation.skills" aria-label="Navigate to Skills section">Skills</a></li>
+      <li><a href="#blog" class="nav-link" data-i18n="navigation.blog" aria-label="Navigate to Blog section">Blog</a></li>
+      <li><a href="#contact" class="nav-link" data-i18n="navigation.contact" aria-label="Navigate to Contact section">Contact</a></li>
     </ul>
-    
+
     <!-- Mobile Theme Switcher -->
-    <div class="mobile-theme-switcher">
-      <button class="theme-btn" id="mobileThemeToggle" aria-label="Toggle theme">
-        <span class="theme-icon">🌙</span>
+    <div class="mobile-theme-switcher" role="group" aria-label="Theme settings">
+      <button class="theme-btn" id="mobileThemeToggle" aria-label="Toggle between light and dark theme" aria-pressed="false">
+        <span class="theme-icon" aria-hidden="true">🌙</span>
         <span class="theme-text">Dark</span>
       </button>
     </div>

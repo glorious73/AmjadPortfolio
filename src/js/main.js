@@ -4,11 +4,15 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (burgerMenu && mobileNavPanel) {
     burgerMenu.addEventListener('click', function() {
-      mobileNavPanel.classList.toggle('active');
-      
+      const isExpanded = mobileNavPanel.classList.toggle('active');
+
+      // Update ARIA attributes for accessibility
+      burgerMenu.setAttribute('aria-expanded', isExpanded);
+      mobileNavPanel.setAttribute('aria-hidden', !isExpanded);
+
       // Animate burger menu
       const spans = burgerMenu.querySelectorAll('span');
-      if (mobileNavPanel.classList.contains('active')) {
+      if (isExpanded) {
         spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
         spans[1].style.opacity = '0';
         spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
@@ -16,6 +20,20 @@ document.addEventListener('DOMContentLoaded', function() {
         spans[0].style.transform = 'none';
         spans[1].style.opacity = '1';
         spans[2].style.transform = 'none';
+      }
+    });
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && mobileNavPanel.classList.contains('active')) {
+        mobileNavPanel.classList.remove('active');
+        burgerMenu.setAttribute('aria-expanded', 'false');
+        mobileNavPanel.setAttribute('aria-hidden', 'true');
+        const spans = burgerMenu.querySelectorAll('span');
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+        burgerMenu.focus();
       }
     });
   }
@@ -45,6 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
           // Close mobile nav if open
           if (mobileNavPanel && mobileNavPanel.classList.contains('active')) {
             mobileNavPanel.classList.remove('active');
+            burgerMenu.setAttribute('aria-expanded', 'false');
+            mobileNavPanel.setAttribute('aria-hidden', 'true');
             const spans = burgerMenu.querySelectorAll('span');
             spans[0].style.transform = 'none';
             spans[1].style.opacity = '1';

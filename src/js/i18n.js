@@ -74,15 +74,27 @@ async function createLanguageSwitcher() {
   return switcher;
 }
 
-// Remove loading state and show content
+// Remove loading state and show content with smooth transition
 function removeLoadingState() {
-  // Clear initial styles and remove loading class
+  const pageLoader = document.getElementById('pageLoader');
   const initialStyles = document.getElementById('initialStyles');
-  if (initialStyles) {
-    initialStyles.innerHTML = '';
+
+  // Add fade-out class to loader
+  if (pageLoader) {
+    pageLoader.classList.add('fade-out');
+
+    // Remove loader from DOM after animation completes
+    pageLoader.addEventListener('transitionend', () => {
+      pageLoader.remove();
+      // Clean up initial styles after loader is gone
+      if (initialStyles) {
+        initialStyles.remove();
+      }
+    }, { once: true });
   }
+
+  // Remove loading class to show content
   document.body.classList.remove('loading');
-  document.body.style.removeProperty('background-color');
 }
 
 // Initialize i18n system
