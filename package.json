@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "rm -rf dist && vite build && copy netlify.toml dist\\netlify.toml",
-    "build:unix": "rm -rf dist && vite build && cp netlify.toml dist/netlify.toml",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
