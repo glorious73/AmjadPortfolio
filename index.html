@@ -5,13 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="meta.title">Amjad Abujamous - Portfolio</title>
   <meta name="description" data-i18n="meta.description" content="Portfolio of Amjad Abujamous, Software Engineer specializing in full-stack development and cloud solutions.">
-  
+
   <!-- SEO Meta Tags -->
   <meta name="keywords" content="Amjad Abujamous, software engineer, full-stack developer, web development, mobile development, cloud computing, C#, JavaScript, Python, .NET, Vue.js, Node.js, portfolio, Riyadh, Saudi Arabia">
   <meta name="author" content="Amjad Abujamous">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="language" content="English">
   <meta name="revisit-after" content="7 days">
+
+  <!-- Locale for bilingual support -->
+  <meta property="locale" content="en_US">
+  <meta property="locale:alternate" content="ar_SA">
+
+  <!-- Preconnect hints for faster loading -->
+  <link rel="preconnect" href="https://cdn.quilljs.com">
+  <link rel="dns-prefetch" href="https://drive.google.com">
+  <link rel="dns-prefetch" href="https://script.google.com">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -107,8 +116,18 @@
 
   <!-- Quill Snow Theme for Blog Post Rendering -->
   <link href="https://cdn.quilljs.com/2.0.3/quill.snow.css" rel="stylesheet">
+
+  <!-- FOUC Prevention - Hide content initially, allow crawlers to see content -->
+  <style id="initialStyles">
+    body.loading .app {
+      opacity: 0;
+    }
+    body.loading {
+      background-color: #1a1a1a;
+    }
+  </style>
 </head>
-<body>
+<body class="loading">
   <div class="app">
     {{> sidebar}}
     {{> mobile-nav}}

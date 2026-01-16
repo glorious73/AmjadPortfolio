@@ -9,7 +9,16 @@
   <!-- SEO Meta Tags -->
   <meta name="keywords" content="Amjad Abujamous, software engineer, blog, tech blog, programming, web development">
   <meta name="author" content="Amjad Abujamous">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+  <!-- Locale for bilingual support -->
+  <meta property="locale" content="en_US">
+  <meta property="locale:alternate" content="ar_SA">
+
+  <!-- Preconnect hints for faster loading -->
+  <link rel="preconnect" href="https://cdn.quilljs.com">
+  <link rel="dns-prefetch" href="https://drive.google.com">
+  <link rel="dns-prefetch" href="https://script.google.com">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article">
@@ -35,8 +44,18 @@
 
   <!-- Quill Snow Theme for Blog Post Rendering -->
   <link href="https://cdn.quilljs.com/2.0.3/quill.snow.css" rel="stylesheet">
+
+  <!-- FOUC Prevention - Hide content initially, allow crawlers to see content -->
+  <style id="initialStyles">
+    body.loading .app {
+      opacity: 0;
+    }
+    body.loading {
+      background-color: #1a1a1a;
+    }
+  </style>
 </head>
-<body>
+<body class="loading">
   <div class="app">
     {{> sidebar}}
     {{> mobile-nav}}

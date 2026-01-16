@@ -74,6 +74,17 @@ async function createLanguageSwitcher() {
   return switcher;
 }
 
+// Remove loading state and show content
+function removeLoadingState() {
+  // Clear initial styles and remove loading class
+  const initialStyles = document.getElementById('initialStyles');
+  if (initialStyles) {
+    initialStyles.innerHTML = '';
+  }
+  document.body.classList.remove('loading');
+  document.body.style.removeProperty('background-color');
+}
+
 // Initialize i18n system
 document.addEventListener('DOMContentLoaded', async () => {
   // Initialize app state
@@ -100,4 +111,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const switcher = await createLanguageSwitcher();
     mobileNavPanel.appendChild(switcher);
   }
+
+  // Remove loading state after translations and switchers are ready
+  removeLoadingState();
 });

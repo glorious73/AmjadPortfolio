@@ -11,6 +11,37 @@ class BlogManager {
   }
 
   /**
+   * Normalize post data from API to expected format
+   * API uses: categories, date, metaDescription
+   * Expected: tags, publishedAt, excerpt, lang
+   */
+  normalizePost(post) {
+    return {
+      ...post,
+      // Map categories to tags
+      tags: post.tags || post.categories || [],
+      // Map date to publishedAt
+      publishedAt: post.publishedAt || post.date,
+      // Map metaDescription to excerpt
+      excerpt: post.excerpt || post.metaDescription || '',
+      // Detect language from title or default to 'en'
+      lang: post.lang || this.detectLanguage(post.title),
+      // Keep updatedAt
+      updatedAt: post.updatedAt || post.date
+    };
+  }
+
+  /**
+   * Detect if text is Arabic based on character range
+   */
+  detectLanguage(text) {
+    if (!text) return 'en';
+    // Check for Arabic characters
+    const arabicPattern = /[\u0600-\u06FF]/;
+    return arabicPattern.test(text) ? 'ar' : 'en';
+  }
+
+  /**
    * Initialize blog on the index page (list view)
    */
   async initBlogList() {
@@ -65,7 +96,8 @@ class BlogManager {
 
       // Fetch all posts without content for list view
       const data = await blogApi.getPosts({ content: false });
-      this.posts = data.posts || [];
+      // Normalize posts to expected format
+      this.posts = (data.posts || []).map(post => this.normalizePost(post));
       this.currentPage = 0;
 
       // Extract all unique tags
@@ -286,7 +318,9 @@ class BlogManager {
       loading.style.display = 'block';
       error.style.display = 'none';
 
-      const post = await blogApi.getPostBySlug(slug);
+      const rawPost = await blogApi.getPostBySlug(slug);
+      // Normalize post to expected format
+      const post = this.normalizePost(rawPost);
 
       this.renderPost(post);
 
@@ -319,6 +353,9 @@ class BlogManager {
     const dir = post.lang === 'ar' ? 'rtl' : 'ltr';
     const tags = post.tags ? post.tags.map(tag => `<span class="post-tag">#${tag}</span>`).join('') : '';
 
+    // Get hero image URL (use large size for hero)
+    const imageUrl = blogApi.getImageUrl(post.image, 1200);
+
     const originalSource = post.originalSource ?
       `<div class="original-source-banner">
         <p>
@@ -330,7 +367,25 @@ class BlogManager {
         </p>
       </div>` : '';
 
-    content.innerHTML = `
+    // Hero header with image (Medium/Dev.to style)
+    // Note: background-image URL is set via JavaScript after innerHTML to avoid & encoding issues
+    const heroHeader = imageUrl ? `
+      <header class="post-hero" dir="${dir}">
+        <div class="post-hero-image" id="postHeroImage">
+          <div class="post-hero-overlay">
+            <div class="post-hero-content">
+              <div class="post-meta">
+                <span class="post-lang-badge">${post.lang.toUpperCase()}</span>
+                <time class="post-date" datetime="${post.publishedAt}">
+                  ${this.formatDate(post.publishedAt)}
+                </time>
+              </div>
+              <h1 class="post-title">${this.escapeHtml(post.title)}</h1>
+            </div>
+          </div>
+        </div>
+      </header>
+    ` : `
       <header class="post-header" dir="${dir}">
         <div class="post-meta">
           <span class="post-lang-badge">${post.lang.toUpperCase()}</span>
@@ -338,18 +393,45 @@ class BlogManager {
             ${this.formatDate(post.publishedAt)}
           </time>
         </div>
-
         <h1 class="post-title">${this.escapeHtml(post.title)}</h1>
-
-        ${post.excerpt ? `<p class="post-excerpt">${this.escapeHtml(post.excerpt)}</p>` : ''}
-
-        ${post.tags && post.tags.length > 0 ? `<div class="post-tags">${tags}</div>` : ''}
-
-        ${originalSource}
       </header>
+    `;
 
-      <div class="post-content" dir="${dir}">
+    // Store imageUrl for later use
+    this._currentImageUrl = imageUrl;
+
+    content.innerHTML = `
+      ${heroHeader}
+
+      ${post.excerpt ? `<p class="post-excerpt" dir="${dir}">${this.escapeHtml(post.excerpt)}</p>` : ''}
+
+      ${post.tags && post.tags.length > 0 ? `<div class="post-tags" dir="${dir}">${tags}</div>` : ''}
+
+      ${originalSource}
+
+      <div class="post-content ql-editor" dir="${dir}">
         ${post.content}
+      </div>
+
+      <div class="social-share-container">
+        <h3 class="social-share-title" data-i18n="blog.shareTitle">Share this article</h3>
+        <div class="social-share">
+          <a class="social-btn whatsapp" id="whatsapp-share" title="Share on WhatsApp">
+            <svg viewBox="0 0 24 24">
+              <path d="M17.498 14.382c-.301-.15-1.767-.867-2.04-.966-.273-.101-.473-.15-.673.15-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.136-.135.301-.345.451-.523.146-.181.194-.301.297-.496.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.172-.015-.371-.015-.571-.015-.2 0-.523.074-.797.359-.273.3-1.045 1.02-1.045 2.475s1.07 2.865 1.219 3.075c.149.18 2.095 3.195 5.076 4.483.709.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.215-3.751.983.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+          </a>
+          <a class="social-btn linkedin" id="linkedin-share" title="Share on LinkedIn">
+            <svg viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          <a class="social-btn twitter" id="twitter-share" title="Share on X (Twitter)">
+            <svg viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+        </div>
       </div>
 
       <footer class="post-footer">
@@ -361,6 +443,17 @@ class BlogManager {
       </footer>
     `;
 
+    // Set hero image background via JavaScript to avoid URL encoding issues
+    if (this._currentImageUrl) {
+      const heroImageEl = document.getElementById('postHeroImage');
+      if (heroImageEl) {
+        heroImageEl.style.backgroundImage = `url('${this._currentImageUrl}')`;
+      }
+    }
+
+    // Attach social share listeners
+    this.attachShareListeners();
+
     // Update page title and meta
     document.title = `${post.title} - Amjad Abujamous`;
     document.documentElement.dir = dir;
@@ -369,6 +462,35 @@ class BlogManager {
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc && post.excerpt) {
       metaDesc.setAttribute('content', post.excerpt);
+    }
+  }
+
+  /**
+   * Attach social share button listeners
+   */
+  attachShareListeners() {
+    const pageUrl = encodeURIComponent(window.location.href);
+    const pageTitle = encodeURIComponent(document.title);
+
+    const whatsappBtn = document.getElementById('whatsapp-share');
+    if (whatsappBtn) {
+      whatsappBtn.addEventListener('click', () => {
+        window.open(`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`, '_blank');
+      });
+    }
+
+    const linkedinBtn = document.getElementById('linkedin-share');
+    if (linkedinBtn) {
+      linkedinBtn.addEventListener('click', () => {
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`, '_blank');
+      });
+    }
+
+    const twitterBtn = document.getElementById('twitter-share');
+    if (twitterBtn) {
+      twitterBtn.addEventListener('click', () => {
+        window.open(`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`, '_blank');
+      });
     }
   }
 

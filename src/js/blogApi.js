@@ -1,6 +1,6 @@
 // Blog API Service
 // Replace with your actual deployment ID
-const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbyM0_HLzOR3BDxasa1CST6u1AuPe4QabE6Jto5huDejboP7A_q9jL9boSHmTEuzBZQh/exec';
+const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbynkZBGwIUfYCLy_cGM3_5LdMC_Q2sa9Ebze8-7k8zkqEQ-m7gvDrww3BOND3PRLteG-w/exec';
 
 class BlogAPI {
   constructor(baseUrl) {
@@ -103,6 +103,22 @@ class BlogAPI {
       console.error('Error fetching post:', error);
       throw error;
     }
+  }
+
+  /**
+   * Get image URL from post image object (supports Google Drive)
+   * @param {Object} image - Image object from API
+   * @param {number} size - Desired width in pixels (default: 400)
+   * @returns {string|null} Image URL or null if no image
+   */
+  getImageUrl(image, size = 400) {
+    if (!image) return null;
+
+    if (image.driveId) {
+      return `https://drive.google.com/thumbnail?id=${image.driveId}&sz=s${size}`;
+    }
+
+    return image.url || null;
   }
 }
 
