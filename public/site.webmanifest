@@ -1,7 +1,7 @@
 {
-  "name": "Amjad Abujamous - Software Engineer Portfolio",
-  "short_name": "Amjad Portfolio",
-  "description": "Portfolio of Amjad Abujamous, Software Engineer specializing in full-stack development and cloud solutions.",
+  "name": "Amjad Abujamous - Software Engineer & Tech Enthusiast",
+  "short_name": "Amjad",
+  "description": "Personal site of Amjad Abujamous, Software Engineer & Tech Enthusiast specializing in full-stack development and cloud solutions.",
   "start_url": "/",
   "scope": "/",
   "icons": [
@@ -34,5 +34,5 @@
   "orientation": "portrait-primary",
   "lang": "en",
   "dir": "auto",
-  "categories": ["portfolio", "personal", "business"]
+  "categories": ["personal", "technology", "blog"]
 }
