@@ -15,14 +15,13 @@ function updateTranslations() {
     } else if (element.tagName === 'META') {
       element.content = translation;
     } else if (element.tagName === 'A') {
-      // Handle contact links
+      // Handle contact links - only update href for email and phone
       if (element.classList.contains('contact-email')) {
         element.href = `mailto:${translation}`;
       } else if (element.classList.contains('contact-phone')) {
         element.href = `tel:${translation}`;
-      } else if (element.classList.contains('contact-linkedin') || element.classList.contains('contact-github')) {
-        element.href = translation;
       }
+      // Social links (linkedin, github, devto, stackoverflow) keep their href, only update text
       element.textContent = translation;
     } else {
       element.textContent = translation;

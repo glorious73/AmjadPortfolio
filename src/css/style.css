@@ -363,7 +363,9 @@ body {
 
 .course-item:hover {
   background: var(--border-color);
-  transform: translateY(-2px);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-color);
 }
 
 /* RTL Support for Education */
@@ -1451,15 +1453,21 @@ html {
 
 /* Skill category interactions */
 .skill-category {
-  transition: transform 0.3s ease;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .skill-category:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-color);
 }
 
 .skill-category li {
-  transition: background-color 0.2s ease, padding-left 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease;
   border-radius: 4px;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -1467,13 +1475,6 @@ html {
 
 .skill-category li:hover {
   background-color: var(--card-bg);
-  padding-left: 1rem;
-  color: var(--accent-color);
-}
-
-[dir="rtl"] .skill-category li:hover {
-  padding-left: 0.5rem;
-  padding-right: 1rem;
 }
 
 /* Contact item interactions */
