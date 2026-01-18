@@ -1,6 +1,6 @@
 // Blog API Service
 // Replace with your actual deployment ID
-const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbynkZBGwIUfYCLy_cGM3_5LdMC_Q2sa9Ebze8-7k8zkqEQ-m7gvDrww3BOND3PRLteG-w/exec';
+const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbzvBWE07omolFyrO7rA-zDjifaRRKCvCnI-3ikjdxn1FA0mFhddW-pddQ0L4NptUsAObQ/exec';
 
 class BlogAPI {
   constructor(baseUrl) {
