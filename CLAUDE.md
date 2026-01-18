@@ -34,6 +34,8 @@ Entry point `src/main.js` imports modules in order:
 3. `js/i18n.js` - internationalization
 4. `js/theme.js` - theme switching (ThemeManager class)
 5. `js/main.js` - DOM interactions
+6. `js/blogApi.js` - blog API service (Google Apps Script backend)
+7. `js/blog.js` - blog UI rendering and filtering
 
 All modules initialize via `DOMContentLoaded` event listeners.
 
@@ -58,7 +60,13 @@ HTML elements use `data-i18n` attributes:
 <h1 data-i18n="sections.home.title">Welcome</h1>
 ```
 
-The i18n system handles meta tags, placeholders, and anchor hrefs automatically.
+The i18n system handles different element types:
+- `<input>`/`<textarea>`: sets `placeholder`
+- `<meta>`: sets `content`
+- `<a>` with `.contact-email`: sets `href` to `mailto:` + translation
+- `<a>` with `.contact-phone`: sets `href` to `tel:` + translation
+- `<a>` social links (`.contact-linkedin`, `.contact-github`, etc.): only updates text, keeps original `href`
+- All other elements: sets `textContent`
 
 ### Theme System
 
@@ -66,6 +74,14 @@ The i18n system handles meta tags, placeholders, and anchor hrefs automatically.
 - Uses `localStorage` with `prefers-color-scheme` fallback
 - Sets `data-theme` attribute on `<html>`
 - CSS variables in `style.css` respond to `[data-theme="dark"]` and `[data-theme="light"]`
+
+### Blog System
+
+The blog uses a Google Apps Script backend with Google Sheets as the data store:
+- `src/js/blogApi.js` - API client (`BlogAPI` class) for fetching posts
+- `src/js/blog.js` - UI rendering, filtering by language/tag
+- `blog.html` - Single post view page (uses `?slug=` query param)
+- See `BLOG_SETUP.md` for backend configuration
 
 ### Build Plugins
 
