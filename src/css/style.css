@@ -69,6 +69,11 @@ h1, h2, h3, h4, h5, h6, b, strong {
   font-weight: 600;
 }
 
+/* Ensure buttons inherit the font */
+button, input[type="submit"], input[type="button"] {
+  font-family: inherit;
+}
+
 .app {
   display: flex;
   min-height: 100vh;
