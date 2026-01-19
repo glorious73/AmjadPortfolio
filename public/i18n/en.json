@@ -97,7 +97,10 @@
       "linkedin": "LinkedIn",
       "github": "GitHub",
       "devto": "Dev.to",
-      "stackoverflow": "Stack Overflow"
+      "stackoverflow": "Stack Overflow",
+      "formTitle": "Send a Message",
+      "formCta": "Have a project idea or question? Fill out the contact form and I'll respond within 24 hours.",
+      "formButton": "Contact Form"
     }
   },
   "blog": {
@@ -125,5 +128,37 @@
   "meta": {
     "title": "Amjad Abujamous - Software Engineer & Tech Enthusiast",
     "description": "Personal site of Amjad Abujamous, Software Engineer & Tech Enthusiast specializing in full-stack development and cloud solutions."
+  },
+  "contactPage": {
+    "meta": {
+      "title": "Contact - Amjad Abujamous",
+      "description": "Get in touch with Amjad Abujamous for collaboration, consulting, or software development inquiries."
+    },
+    "title": "Get in Touch",
+    "description": "Have a question or want to collaborate? Fill out the form below and I'll get back to you as soon as possible.",
+    "infoTitle": "Contact Information",
+    "infoDescription": "Feel free to reach out through any of these channels.",
+    "info": {
+      "emailLabel": "Email",
+      "phoneLabel": "Phone",
+      "locationLabel": "Location",
+      "location": "Riyadh, Saudi Arabia"
+    },
+    "socialTitle": "Follow Me",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your.email@example.com",
+      "topic": "Topic",
+      "topicPlaceholder": "Select a topic",
+      "topicGeneral": "General Inquiry",
+      "topicTechnical": "Technical Question",
+      "topicCollaboration": "Collaboration",
+      "message": "Message",
+      "messagePlaceholder": "Your message...",
+      "submit": "Send Message"
+    },
+    "backToHome": "Back to Home"
   }
 }

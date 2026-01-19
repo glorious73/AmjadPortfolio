@@ -14,6 +14,8 @@ function updateTranslations() {
       element.placeholder = translation;
     } else if (element.tagName === 'META') {
       element.content = translation;
+    } else if (element.tagName === 'OPTION') {
+      element.textContent = translation;
     } else if (element.tagName === 'A') {
       // Handle contact links - only update href for email and phone
       if (element.classList.contains('contact-email')) {
@@ -38,7 +40,7 @@ async function createLanguageSwitcher() {
   try {
     const [usFlagResponse, arabFlagResponse] = await Promise.all([
       fetch('/flags/Flag_of_the_United_States.svg'),
-      fetch('/flags/Flag_of_the_Arab_League.svg')
+      fetch('/flags/Flag_of_Saudi_Arabia.svg')
     ]);
 
     const usFlagSvg = await usFlagResponse.text();

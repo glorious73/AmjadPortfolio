@@ -4,3 +4,4 @@ import './js/i18n.js';
 import './js/theme.js';
 import './js/main.js';
 import './js/blog.js';
+import './js/contact.js';

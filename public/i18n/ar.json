@@ -97,7 +97,10 @@
       "linkedin": "LinkedIn",
       "github": "GitHub",
       "devto": "Dev.to",
-      "stackoverflow": "Stack Overflow"
+      "stackoverflow": "Stack Overflow",
+      "formTitle": "أرسل رسالة",
+      "formCta": "لديك فكرة مشروع أو سؤال؟ قم بملء نموذج التواصل وسأرد خلال 24 ساعة.",
+      "formButton": "نموذج التواصل"
     }
   },
   "blog": {
@@ -125,5 +128,37 @@
   "meta": {
     "title": "أمجد أبو جاموس - مهندس برمجيات ومتحمس للتقنية",
     "description": "الموقع الشخصي لأمجد أبو جاموس، مهندس برمجيات ومتحمس للتقنية متخصص في تطوير الواجهات والخدمات السحابية."
+  },
+  "contactPage": {
+    "meta": {
+      "title": "تواصل - أمجد أبو جاموس",
+      "description": "تواصل مع أمجد أبو جاموس للتعاون والاستشارات أو استفسارات تطوير البرمجيات."
+    },
+    "title": "تواصل معي",
+    "description": "لديك سؤال أو ترغب في التعاون؟ قم بملء النموذج أدناه وسأرد عليك في أقرب وقت ممكن.",
+    "infoTitle": "معلومات التواصل",
+    "infoDescription": "لا تتردد في التواصل عبر أي من هذه القنوات.",
+    "info": {
+      "emailLabel": "البريد الإلكتروني",
+      "phoneLabel": "الهاتف",
+      "locationLabel": "الموقع",
+      "location": "الرياض، المملكة العربية السعودية"
+    },
+    "socialTitle": "تابعني",
+    "form": {
+      "name": "الاسم",
+      "namePlaceholder": "اسمك",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "بريدك@example.com",
+      "topic": "الموضوع",
+      "topicPlaceholder": "اختر موضوعاً",
+      "topicGeneral": "استفسار عام",
+      "topicTechnical": "سؤال تقني",
+      "topicCollaboration": "تعاون",
+      "message": "الرسالة",
+      "messagePlaceholder": "رسالتك...",
+      "submit": "إرسال الرسالة"
+    },
+    "backToHome": "العودة للرئيسية"
   }
 }
