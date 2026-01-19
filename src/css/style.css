@@ -428,6 +428,7 @@ button, input[type="submit"], input[type="button"] {
 .contact-item {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   padding: 0.75rem;
   background: var(--card-bg);
@@ -449,7 +450,26 @@ button, input[type="submit"], input[type="button"] {
 
 .contact-icon {
   font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+/* Contact icon colors - light theme */
+[data-theme="light"] .icon-phone { color: brown; }
+[data-theme="light"] .icon-linkedin { color: darkblue; }
+[data-theme="light"] .icon-github { color: #333; }
+[data-theme="light"] .icon-devto { color: #000; }
+[data-theme="light"] .icon-stackoverflow { color: orange; }
+
+/* Contact icon colors - dark theme (lighter colors for visibility) */
+[data-theme="dark"] .icon-phone { color: #4ade80; } /* light green */
+[data-theme="dark"] .icon-linkedin { color: #60a5fa; } /* light blue */
+[data-theme="dark"] .icon-github,
+[data-theme="dark"] .icon-devto {
+  color: var(--text-primary);
+}
+[data-theme="dark"] .icon-stackoverflow { color: orange; }
 
 /* Contact section CTA */
 .contact-cta {
