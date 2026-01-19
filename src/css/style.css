@@ -137,6 +137,11 @@ button, input[type="submit"], input[type="button"] {
   margin-bottom: 0.5rem;
 }
 
+.nav-menu li:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+}
+
 .nav-link {
   color: white;
   text-decoration: none;
@@ -270,6 +275,7 @@ button, input[type="submit"], input[type="button"] {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
 }
+
 
 .section h1, .section h2 {
   margin-bottom: 1.5rem;
