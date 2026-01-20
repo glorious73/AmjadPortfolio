@@ -3,6 +3,7 @@
   "title": "Software Engineer",
   "navigation": {
     "home": "Home",
+    "experience": "Experience",
     "about": "About",
     "education": "Education",
     "projects": "Projects",
@@ -14,6 +15,41 @@
     "home": {
       "title": "Welcome",
       "description": "This is Amjad, a passionate software engineer who turns ideas into reality, fast. With deep expertise in JavaScript, Python, and .NET, combined with hands-on experience leveraging AI agents like Claude Code, Open Code, and n8n, he delivers reliable solutions at unprecedented speed. He quickly adapts to new tools and technologies, ensuring every project benefits from the latest innovations. Whether it's understanding complex business processes or building the software to support them, Amjad gets things done."
+    },
+    "experience": {
+      "title": "Experience",
+      "items": {
+        "item1": {
+          "date": "2015 - 2019",
+          "title": "BSc Software Engineering",
+          "company": "Alfaisal University"
+        },
+        "item2": {
+          "date": "2019 - 2020",
+          "title": "Software Engineer",
+          "company": "Ghallah (Taqaddam Program)"
+        },
+        "item3": {
+          "date": "2019 - 2022",
+          "title": "Software Engineer",
+          "company": "Geidea"
+        },
+        "item4": {
+          "date": "2022 - 2024",
+          "title": "Software Engineer",
+          "company": "IST Networks"
+        },
+        "item5": {
+          "date": "2024 - Present",
+          "title": "Head of IT",
+          "company": "Msarat Global"
+        },
+        "item6": {
+          "date": "2024 - Present",
+          "title": "CTO",
+          "company": "Edama Solutions"
+        }
+      }
     },
     "about": {
       "title": "About",

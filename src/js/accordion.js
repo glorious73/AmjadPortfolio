@@ -7,7 +7,7 @@ class MobileAccordion {
     this.initialized = false;
 
     // Sections to convert (home excluded - stays always visible)
-    this.sectionIds = ['about', 'education', 'projects', 'skills', 'blog', 'contact'];
+    this.sectionIds = ['experience', 'about', 'education', 'projects', 'skills', 'blog', 'contact'];
 
     this.init();
   }
