@@ -13,12 +13,12 @@
   "sections": {
     "home": {
       "title": "Welcome",
-      "description": "This is Amjad, a passionate software engineer with the aim of creating reliable and clean solutions that turn creative ideas into reality. He can best contribute in understanding the products to be delivered and the business processes around them, and then draft the procedures and design and implement the software that is needed to create and support them. Furthermore, he has good experience with JavaScript, Python, and the .NET framework as well as a solid understanding of Scrum, Waterfall, and the different types of SDLC."
+      "description": "This is Amjad, a passionate software engineer who turns ideas into reality, fast. With deep expertise in JavaScript, Python, and .NET, combined with hands-on experience leveraging AI agents like Claude Code, Open Code, and n8n, he delivers reliable solutions at unprecedented speed. He quickly adapts to new tools and technologies, ensuring every project benefits from the latest innovations. Whether it's understanding complex business processes or building the software to support them, Amjad gets things done."
     },
     "about": {
       "title": "About",
-      "description1": "The Chief Technology Officer of Edama Solutions. He is a passionate and capable software engineer who aims to create reliable and dependable solutions that enable private and government organizations to manage their businesses. He has participated in building impactful technology projects, products, websites, and applications for several organizations, including Al Rajhi Bank, Geidea, and others.",
-      "description2": "Also, he has taken part of competitions and business accelerators, such as the Taqaddam Business Accelerator at King Abdullah University of Science and Technology. He also has experience in product management and decision-making, which maximizes his influence within the organization."
+      "description1": "I'm the CTO at Edama Solutions, where I lead the technical vision and build software that helps organizations run their operations smoothly. Over the years, I've had the opportunity to work on impactful projects for major clients like Al Rajhi Bank and Geidea, delivering everything from internal tools to customer-facing applications.",
+      "description2": "Beyond my day job, I've participated in programs like the Taqaddam Business Accelerator at KAUST, which sharpened my product thinking and business acumen. I enjoy wearing multiple hats, whether it's architecture, hands-on coding, or making product decisions that move the needle."
     },
     "education": {
       "title": "Education",

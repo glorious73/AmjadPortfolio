@@ -3,5 +3,6 @@ import './js/state.js';
 import './js/i18n.js';
 import './js/theme.js';
 import './js/main.js';
+import './js/accordion.js';
 import './js/blog.js';
 import './js/contact.js';

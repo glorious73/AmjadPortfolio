@@ -38,38 +38,61 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Smooth scrolling for navigation links
+  // Smooth scrolling for navigation links with accordion integration
   const navLinks = document.querySelectorAll('.nav-link, .bottom-nav-item');
   navLinks.forEach(link => {
     link.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (targetId.startsWith('#')) {
-        const targetElement = document.querySelector(targetId);
+      const href = this.getAttribute('href');
 
-        // If on blog.html and target doesn't exist, redirect to index.html
-        if (!targetElement && window.location.pathname.includes('blog.html')) {
-          window.location.href = '/' + targetId;
-          return;
+      // Parse section ID from href (handles both "#about" and "/#about")
+      let sectionId = href;
+      if (href.startsWith('/#')) {
+        sectionId = href.substring(2);
+      } else if (href.startsWith('#')) {
+        sectionId = href.substring(1);
+      } else {
+        return; // Not a hash link, let default behavior proceed
+      }
+
+      const targetElement = document.getElementById(sectionId);
+
+      // If on blog.html and target doesn't exist, redirect to index.html
+      if (!targetElement && window.location.pathname.includes('blog.html')) {
+        window.location.href = '/#' + sectionId;
+        return;
+      }
+
+      // If target exists on current page
+      if (targetElement) {
+        e.preventDefault();
+
+        // Expand accordion if on mobile
+        if (window.mobileAccordion && window.mobileAccordion.isMobile) {
+          window.mobileAccordion.expandById(sectionId);
         }
 
-        // If target exists on current page, smooth scroll
-        if (targetElement) {
-          e.preventDefault();
-          targetElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+        // Scroll to section with offset for mobile nav
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileNavHeight = mobileNav ? mobileNav.offsetHeight : 0;
+        const isMobile = window.innerWidth <= 1024;
+        const offset = isMobile ? mobileNavHeight + 16 : 0;
 
-          // Close mobile nav if open
-          if (mobileNavPanel && mobileNavPanel.classList.contains('active')) {
-            mobileNavPanel.classList.remove('active');
-            burgerMenu.setAttribute('aria-expanded', 'false');
-            mobileNavPanel.setAttribute('aria-hidden', 'true');
-            const spans = burgerMenu.querySelectorAll('span');
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
-          }
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+
+        // Close mobile nav if open
+        if (mobileNavPanel && mobileNavPanel.classList.contains('active')) {
+          mobileNavPanel.classList.remove('active');
+          burgerMenu.setAttribute('aria-expanded', 'false');
+          mobileNavPanel.setAttribute('aria-hidden', 'true');
+          const spans = burgerMenu.querySelectorAll('span');
+          spans[0].style.transform = 'none';
+          spans[1].style.opacity = '1';
+          spans[2].style.transform = 'none';
         }
       }
     });
