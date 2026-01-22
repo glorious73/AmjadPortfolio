@@ -10,6 +10,20 @@ class BlogManager {
     this.currentPage = 0;
   }
 
+  getLocalImagePath(slug) {
+    const imageFilenames = {
+      'claude-is-awesome': 'claude-is-awesome.jpg',
+      'take-your-productivity-to-the-next-level': 'take-your-productivity-to-the-next-level.jpg',
+      'كتاب-لكل-موظف-وكل-إداري': 'kitab-li-kull-mowathif-wa-kull-idari.jpg'
+    };
+
+    const filename = imageFilenames[slug];
+    if (filename) {
+      return `/images/blog/${filename}`;
+    }
+    return null;
+  }
+
   /**
    * Normalize post data from API to expected format
    * API uses: categories, date, metaDescription
@@ -268,7 +282,7 @@ class BlogManager {
       <article class="blog-card" dir="${dir}">
         <div class="blog-card-header">
           <h3 class="blog-card-title">
-            <a href="/blog.html?slug=${encodeURIComponent(post.slug)}">${this.escapeHtml(post.title)}</a>
+            <a href="/blog/${encodeURIComponent(post.slug)}">${this.escapeHtml(post.title)}</a>
           </h3>
           <span class="blog-card-lang">${post.lang.toUpperCase()}</span>
         </div>
@@ -294,15 +308,27 @@ class BlogManager {
     const postContainer = document.getElementById('blogPostContent');
     if (!postContainer) return;
 
-    // Get slug from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const slug = urlParams.get('slug');
+    let slug;
+
+    // Try clean URL format first: /blog/{slug}
+    const pathSegments = window.location.pathname.split('/').filter(s => s);
+    const blogIndex = pathSegments.indexOf('blog');
+
+    if (blogIndex !== -1 && pathSegments[blogIndex + 1]) {
+      // Clean URL format: /blog/{slug}
+      slug = pathSegments[blogIndex + 1];
+    } else {
+      // Fallback to query parameter format: /blog.html?slug={slug}
+      const urlParams = new URLSearchParams(window.location.search);
+      slug = urlParams.get('slug');
+    }
 
     if (!slug) {
       this.showPostError();
       return;
     }
 
+    this.slug = slug;
     await this.loadPost(slug);
   }
 
@@ -318,18 +344,97 @@ class BlogManager {
       loading.style.display = 'block';
       error.style.display = 'none';
 
-      const rawPost = await blogApi.getPostBySlug(slug);
-      // Normalize post to expected format
-      const post = this.normalizePost(rawPost);
+      // Check if pre-rendered post data exists in HTML
+      const postContainer = document.getElementById('blogPostContent');
+      const postDataEl = postContainer?.querySelector('.post-data');
+      let post = null;
+      let isPreRendered = false;
 
-      this.renderPost(post);
+      if (postDataEl) {
+        try {
+          const scriptTag = postDataEl.querySelector('script[type="application/json"]');
+          if (scriptTag) {
+            const preRenderedPost = JSON.parse(scriptTag.textContent);
+            post = this.normalizePost(preRenderedPost);
+            isPreRendered = true;
+            console.log('[Blog] Using pre-rendered post data');
+          }
+        } catch (e) {
+          console.warn('[Blog] Failed to parse pre-rendered data:', e);
+        }
+      }
 
-      loading.style.display = 'none';
-      content.style.display = 'block';
+      if (post) {
+        // Render pre-rendered post immediately (fast)
+        this.renderPost(post);
+        loading.style.display = 'none';
+        content.style.display = 'block';
+
+        // Check content freshness in background
+        if (isPreRendered) {
+          setTimeout(() => this.checkContentFreshness(post), 100);
+        }
+      } else {
+        // No pre-rendered data, fetch from API
+        const rawPost = await blogApi.getPostBySlug(slug);
+        post = this.normalizePost(rawPost);
+        this.renderPost(post);
+        loading.style.display = 'none';
+        content.style.display = 'block';
+      }
     } catch (err) {
       console.error('Failed to load post:', err);
       this.showPostError();
     }
+  }
+
+  /**
+   * Check content freshness and update if needed
+   */
+  async checkContentFreshness(renderedPost) {
+    try {
+      // Get rendered version from meta tag
+      const versionMeta = document.querySelector('meta[name="post-version"]');
+      const renderedVersion = versionMeta?.content;
+
+      if (!renderedVersion) {
+        console.log('[Blog] No version metadata, skipping freshness check');
+        return;
+      }
+
+      // Fetch current version from API
+      const rawPost = await blogApi.getPostBySlug(this.slug);
+      const currentPost = this.normalizePost(rawPost);
+      const currentVersion = currentPost.updatedAt || currentPost.date;
+
+      // Compare timestamps
+      if (currentVersion > renderedVersion) {
+        console.log('[Blog] Content updated, refreshing...');
+        this.updatePostContent(currentPost);
+      } else {
+        console.log('[Blog] Content is up-to-date');
+      }
+    } catch (err) {
+      console.warn('[Blog] Freshness check failed:', err);
+    }
+  }
+
+  /**
+   * Update post content with fresh data
+   */
+  updatePostContent(freshPost) {
+    const post = this.normalizePost(freshPost);
+
+    // Re-render post content
+    this.renderPost(post);
+
+    // Update meta tags with new timestamp
+    const versionMeta = document.querySelector('meta[name="post-version"]');
+    if (versionMeta) {
+      versionMeta.setAttribute('content', post.updatedAt || post.date);
+    }
+
+    console.log('[Blog] Post content updated');
   }
 
   /**
@@ -354,7 +459,8 @@ class BlogManager {
     const tags = post.tags ? post.tags.map(tag => `<span class="post-tag">#${tag}</span>`).join('') : '';
 
     // Get hero image URL (use large size for hero)
-    const imageUrl = blogApi.getImageUrl(post.image, 1200);
+    // Prefer local image path for hero display, fallback to API URL
+    const imageUrl = this.getLocalImagePath(post.slug, post.lang) || blogApi.getImageUrl(post.image, 1200);
 
     const originalSource = post.originalSource ?
       `<div class="original-source-banner">

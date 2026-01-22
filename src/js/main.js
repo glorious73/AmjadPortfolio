@@ -121,4 +121,27 @@ document.addEventListener('DOMContentLoaded', function() {
     section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(section);
   });
+
+  // Update organization links from translations
+  function updateOrgLinks() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    timelineItems.forEach((item, index) => {
+      const link = item.querySelector('.org-link');
+      const urlKey = `sections.experience.items.item${index + 1}.url`;
+      const url = window.appState.t(urlKey);
+
+      if (link && url && url !== urlKey) {
+        link.href = url;
+        link.style.display = 'inline-flex';
+      } else if (link) {
+        link.style.display = 'none';
+      }
+    });
+  }
+
+  // Update org links after translations are loaded
+  if (window.appState) {
+    window.appState.subscribe(updateOrgLinks);
+    setTimeout(updateOrgLinks, 100);
+  }
 });

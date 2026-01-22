@@ -4,6 +4,9 @@ import { resolve } from 'path';
 import handlebars from 'vite-plugin-handlebars';
 import { seoContentInjector } from './scripts/seo-content-injector.js';
 
+// Import blog metadata generator
+import { blogMetadataGenerator } from './scripts/blog-metadata-generator.js';
+
 // Cross-platform plugin to copy netlify.toml to dist
 function copyNetlifyConfig() {
   return {
@@ -29,6 +32,8 @@ export default defineConfig({
     }),
     // SEO: Inject English translations into built HTML for crawlers
     seoContentInjector(),
+    // Blog: Generate individual blog post HTML files with metadata
+    blogMetadataGenerator(),
     // Copy netlify.toml after build (cross-platform)
     copyNetlifyConfig()
   ],

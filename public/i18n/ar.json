@@ -22,32 +22,38 @@
         "item1": {
           "date": "2015 - 2019",
           "title": "بكالوريوس هندسة البرمجيات",
-          "company": "جامعة الفيصل"
+          "company": "جامعة الفيصل",
+          "url": "https://www.alfaisal.edu"
         },
         "item2": {
           "date": "2019 - 2020",
           "title": "مهندس برمجيات",
-          "company": "غلة (برنامج تقادم)"
+          "company": "غلة (برنامج تقادم)",
+          "url": "https://taqadam.kaust.edu.sa/"
         },
         "item3": {
           "date": "2019 - 2022",
           "title": "مهندس برمجيات",
-          "company": "جيديا"
+          "company": "جيديا",
+          "url": "https://www.geidea.net"
         },
         "item4": {
           "date": "2022 - 2024",
           "title": "مهندس برمجيات",
-          "company": "IST Networks"
+          "company": "IST Networks",
+          "url": "https://www.istnetworks.com"
         },
         "item5": {
           "date": "2024 - الحالي",
           "title": "مدير تقنية المعلومات",
-          "company": "مسارات العالمية"
+          "company": "مسارات العالمية",
+          "url": "https://msarat.com.sa/"
         },
         "item6": {
           "date": "2024 - الحالي",
           "title": "الرئيس التنفيذي للتقنية",
-          "company": "حلول الإدامة"
+          "company": "حلول الإدامة",
+          "url": "https://esit.com.sa"
         }
       }
     },
