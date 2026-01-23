@@ -2,7 +2,7 @@ class Contact {
   constructor() {
     this.formLoadTime = null;
     this.MIN_SUBMIT_TIME_MS = 3000; // Minimum 3 seconds to fill form
-    this.ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbxIw2YgYN4gKWQ-kNeAAc9J-PqOPxF4DDb5RrLW90EWVzagktCHHMCZgy4kx-pIY6nUCg/exec';
+    this.ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbxFe2ZcGl5goiMK6z3OHIVCDW-4llMg-oLapSGmBOB3-1UQkXwPT3yBXOaFsAedmGC43A/exec';
   }
 
   static getInstance() {
@@ -63,6 +63,9 @@ class Contact {
 
     button.setAttribute('aria-busy', 'true');
     button.setAttribute('disabled', '');
+
+    // Ensure lang field is up to date before submission
+    this.updateLanguageField();
 
     // Prepare form data - exclude honeypot
     const data = new FormData(form);
