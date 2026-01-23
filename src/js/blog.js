@@ -575,7 +575,7 @@ class BlogManager {
    * Attach social share button listeners
    */
   attachShareListeners() {
-    const pageUrl = encodeURIComponent(window.location.href);
+    const pageUrl = encodeURIComponent(`${window.location.origin}/blog/${this.slug}`);
     const pageTitle = encodeURIComponent(document.title);
 
     const whatsappBtn = document.getElementById('whatsapp-share');
