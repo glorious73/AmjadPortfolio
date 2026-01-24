@@ -59,8 +59,8 @@
     },
     "about": {
       "title": "About",
-      "description1": "I'm the CTO at Edama Solutions, where I lead the technical vision and build software that helps organizations run their operations smoothly. Over the years, I've had the opportunity to work on impactful projects for major clients like Al Rajhi Bank and Geidea, delivering everything from internal tools to customer-facing applications.",
-      "description2": "Beyond my day job, I've participated in programs like the Taqaddam Business Accelerator at KAUST, which sharpened my product thinking and business acumen. I enjoy wearing multiple hats, whether it's architecture, hands-on coding, or making product decisions that move the needle."
+      "description1": "Amjad is the CTO at Edama Solutions, where he leads the technical vision and builds software that helps organizations run their operations smoothly. Over the years, he has had the opportunity to work on impactful projects for major clients like Al Rajhi Bank and Geidea, delivering everything from internal tools to customer-facing applications.",
+      "description2": "Beyond his day job, he has participated in programs like the Taqaddam Business Accelerator at KAUST, which sharpened his product thinking and business acumen. He enjoys wearing multiple hats, whether it's architecture, hands-on coding, or making product decisions that move the needle."
     },
     "education": {
       "title": "Education",
@@ -125,8 +125,8 @@
           "docker": "Docker",
           "bundlers": "Bundlers: Webpack, Parcel, Vite",
           "terminal": "Terminal: Linux Bash, PowerShell",
-          "codingAgents": "Coding Agents: Claude Code, Open Code",
-          "presentations": "Presentations: PowerPoint, Google Slides, Gamma, Canva",
+          "codingAgents": "AI Agents: Claude Code, Open Code, n8n",
+          "presentations": "Presentations: PowerPoint, Google Slides, Gamma, Canva, HTML/CSS",
           "editors": "Text Editors: Visual Studio Code, Zed"
         }
       }

@@ -125,8 +125,8 @@
           "docker": "Docker",
           "bundlers": "بناء الحل: Webpack, Parcel, Vite",
           "terminal": "أدوات نظام التشغيل: Linux Bash, PowerShell",
-          "codingAgents": "وكلاء البرمجة: Claude Code, Open Code",
-          "presentations": "العروض التقديمية: PowerPoint, Google Slides, Gamma, Canva",
+          "codingAgents": "وكلاء الذكاء الاصطناعي: Claude Code, Open Code, n8n",
+          "presentations": "العروض التقديمية: PowerPoint, Google Slides, Gamma, Canva, HTML/CSS",
           "editors": "محررات النصوص: Visual Studio Code, Zed"
         }
       }
