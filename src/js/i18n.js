@@ -63,6 +63,12 @@ async function createLanguageSwitcher() {
     if (e.target.classList.contains('lang-btn') || e.target.closest('.lang-btn')) {
       const button = e.target.classList.contains('lang-btn') ? e.target : e.target.closest('.lang-btn');
       const lang = button.getAttribute('data-lang');
+      
+      // Mark user language preference when manually switching
+      if (window.blogManager) {
+        window.blogManager.setUserLanguagePreference();
+      }
+      
       await window.appState.changeLanguage(lang);
 
       // Update active button

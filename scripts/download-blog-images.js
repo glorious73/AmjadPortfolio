@@ -48,10 +48,22 @@ function getImageFilename(post) {
     'claude-is-awesome': 'claude-is-awesome.jpg',
     'take-your-productivity-to-the-next-level': 'take-your-productivity-to-the-next-level.jpg',
     'كتاب-لكل-موظف-وكل-إداري': 'kitab-li-kull-mowathif-wa-kull-idari.jpg',
-    'take-your-productivity-to-the-next-level': 'take-your-productivity-to-the-next-level.jpg'
+    'take-your-productivity-to-the-next-level': 'take-your-productivity-to-the-next-level.jpg',
+    'a-few-beliefs-i-had-at-21-that-didnt-survive-reality': 'a-few-beliefs-i-had-at-21-that-didnt-survive-reality.jpg'
   };
 
   return filenames[post.slug] || null;
+}
+
+function generateFilenameFromSlug(slug) {
+  return `${slug}.jpg`;
+}
+
+function addFilenameMapping(post) {
+  const filename = generateFilenameFromSlug(post.slug);
+  console.log(`  Suggested filename mapping for new post:`);
+  console.log(`    '${post.slug}': '${filename}'`);
+  return filename;
 }
 
 async function main() {
@@ -70,21 +82,28 @@ async function main() {
     let downloadedCount = 0;
     let skippedCount = 0;
 
+    const postsWithoutMapping = [];
+    
     for (const post of posts) {
       if (!post.image || !post.image.driveId) {
         skippedCount++;
         continue;
       }
 
-      const filename = getImageFilename(post);
-
-      if (!filename) {
-        console.log(`  Skipped (no filename mapping): ${post.slug}`);
-        skippedCount++;
-        continue;
+      const hasMapping = !!getImageFilename(post);
+      if (!hasMapping) {
+        postsWithoutMapping.push(post);
       }
 
-      const imageUrl = `https://drive.google.com/thumbnail?id=${post.image.driveId}&sz=s1200`;
+      let filename = getImageFilename(post);
+
+      if (!filename) {
+        filename = addFilenameMapping(post);
+        console.log(`  Add this mapping to the getImageFilename function to auto-download in future runs.`);
+        // Still download the image even without explicit mapping
+      }
+
+      const imageUrl = `https://lh3.googleusercontent.com/d/${post.image.driveId}=s1200`;
 
       try {
         await downloadImage(imageUrl, filename);
@@ -99,6 +118,15 @@ async function main() {
     console.log(`  Downloaded: ${downloadedCount} images`);
     console.log(`  Skipped: ${skippedCount} posts`);
     console.log(`  Images saved to: public/images/blog/\n`);
+
+    if (postsWithoutMapping.length > 0) {
+      console.log(`\n[Blog Image Downloader] New posts detected without filename mappings:`);
+      postsWithoutMapping.forEach(post => {
+        const filename = generateFilenameFromSlug(post.slug);
+        console.log(`    '${post.slug}': '${filename}',`);
+      });
+      console.log(`\nAdd these mappings to the getImageFilename function to streamline future downloads.`);
+    }
 
     if (downloadedCount > 0) {
       console.log('\n[Blog Image Downloader] Success! Run "npm run build" to regenerate blog HTML files.\n');

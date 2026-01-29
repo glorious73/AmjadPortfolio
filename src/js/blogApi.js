@@ -115,7 +115,7 @@ class BlogAPI {
     if (!image) return null;
 
     if (image.driveId) {
-      return `https://drive.google.com/thumbnail?id=${image.driveId}&sz=s${size}`;
+      return `https://lh3.googleusercontent.com/d/${image.driveId}=s${size}`;
     }
 
     return image.url || null;

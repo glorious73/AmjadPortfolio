@@ -38,11 +38,39 @@ class BlogManager {
       publishedAt: post.publishedAt || post.date,
       // Map metaDescription to excerpt
       excerpt: post.excerpt || post.metaDescription || '',
-      // Detect language from title or default to 'en'
-      lang: post.lang || this.detectLanguage(post.title),
+      // Enhanced language detection with priority order
+      lang: this.detectLanguageWithPriority(post),
       // Keep updatedAt
       updatedAt: post.updatedAt || post.date
     };
+  }
+
+  /**
+   * Enhanced language detection with priority order
+   */
+  detectLanguageWithPriority(post) {
+    // 1. Use explicit language field if available
+    if (post.lang && ['en', 'ar'].includes(post.lang)) {
+      return post.lang;
+    }
+
+    // 2. Detect from title (highest priority text content)
+    if (post.title && this.detectLanguage(post.title) === 'ar') {
+      return 'ar';
+    }
+
+    // 3. Detect from excerpt
+    if (post.excerpt && this.detectLanguage(post.excerpt) === 'ar') {
+      return 'ar';
+    }
+
+    // 4. Detect from content sample (first 200 chars)
+    if (post.content && this.detectLanguage(post.content.substring(0, 200)) === 'ar') {
+      return 'ar';
+    }
+
+    // 5. Default to English
+    return 'en';
   }
 
   /**
@@ -366,7 +394,7 @@ class BlogManager {
 
       if (post) {
         // Render pre-rendered post immediately (fast)
-        this.renderPost(post);
+        await this.renderPost(post);
         loading.style.display = 'none';
         content.style.display = 'block';
 
@@ -378,7 +406,7 @@ class BlogManager {
         // No pre-rendered data, fetch from API
         const rawPost = await blogApi.getPostBySlug(slug);
         post = this.normalizePost(rawPost);
-        this.renderPost(post);
+        await this.renderPost(post);
         loading.style.display = 'none';
         content.style.display = 'block';
       }
@@ -410,7 +438,7 @@ class BlogManager {
       // Compare timestamps
       if (currentVersion > renderedVersion) {
         console.log('[Blog] Content updated, refreshing...');
-        this.updatePostContent(currentPost);
+        await this.updatePostContent(currentPost);
       } else {
         console.log('[Blog] Content is up-to-date');
       }
@@ -422,11 +450,11 @@ class BlogManager {
   /**
    * Update post content with fresh data
    */
-  updatePostContent(freshPost) {
+  async updatePostContent(freshPost) {
     const post = this.normalizePost(freshPost);
 
     // Re-render post content
-    this.renderPost(post);
+    await this.renderPost(post);
 
     // Update meta tags with new timestamp
     const versionMeta = document.querySelector('meta[name="post-version"]');
@@ -453,7 +481,7 @@ class BlogManager {
   /**
    * Render single post
    */
-  renderPost(post) {
+  async renderPost(post) {
     const content = document.getElementById('postContent');
     const dir = post.lang === 'ar' ? 'rtl' : 'ltr';
     const tags = post.tags ? post.tags.map(tag => `<span class="post-tag">#${tag}</span>`).join('') : '';
@@ -564,6 +592,9 @@ class BlogManager {
     document.title = `${post.title} - Amjad Abujamous`;
     document.documentElement.dir = dir;
 
+    // Set website language to match post language
+    await this.setPostLanguage(post.lang);
+
     // Update meta description
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc && post.excerpt) {
@@ -615,6 +646,29 @@ class BlogManager {
   }
 
   /**
+   * Set website language to match post language, respecting user preferences
+   */
+  async setPostLanguage(postLanguage) {
+    // Check if user has manually set a language preference during this session
+    const hasUserPreference = sessionStorage.getItem('userLanguagePreference') === 'true';
+    const currentLang = window.appState?.currentLanguage || 'en';
+
+    // Only auto-switch if user hasn't set a preference and language is different
+    if (!hasUserPreference && currentLang !== postLanguage) {
+      console.log(`[Blog] Auto-switching language from ${currentLang} to ${postLanguage} for post compatibility`);
+      await window.appState.changeLanguage(postLanguage);
+    }
+  }
+
+  /**
+   * Mark that user has manually changed language preference
+   */
+  setUserLanguagePreference() {
+    sessionStorage.setItem('userLanguagePreference', 'true');
+    console.log('[Blog] User language preference set - auto-language detection disabled for session');
+  }
+
+  /**
    * Escape HTML to prevent XSS
    */
   escapeHtml(text) {
@@ -626,6 +680,9 @@ class BlogManager {
 
 // Create global instance
 const blogManager = new BlogManager();
+
+// Make available globally for i18n integration
+window.blogManager = blogManager;
 
 // Initialize based on page
 document.addEventListener('DOMContentLoaded', () => {
