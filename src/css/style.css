@@ -324,6 +324,33 @@ button, input[type="submit"], input[type="button"] {
   color: var(--text-secondary);
 }
 
+.project-card h3 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.project-card h3 a:hover {
+  color: var(--accent-color);
+}
+
+.project-card h3 .external-link-icon {
+  margin-left: 0.5rem;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.project-card h3:hover .external-link-icon {
+  color: var(--accent-color);
+}
+
+[dir="rtl"] .project-card h3 .external-link-icon {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
 .project-tags {
   display: flex;
   flex-wrap: wrap;

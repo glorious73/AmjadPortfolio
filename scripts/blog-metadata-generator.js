@@ -91,7 +91,7 @@ async function generateBlogPostHtml(post, postUrl, templatePath) {
   const description = excerpt.length > 160 ? excerpt.substring(0, 157) + '...' : excerpt;
   const updatedAt = post.updatedAt || post.date;
   const imageUrl = post.image ? getImageUrl(post.image, 1200) : 'https://iamamjad.com/profile/amjad%20profile%20pic.png';
-  const localImagePath = post.image ? getLocalImagePath(post.slug, post.lang) : '/profile/amjad profile pic.png';
+  const localImagePath = post.image ? `/images/blog/${post.slug}.jpg` : '/profile/amjad profile pic.png';
   const dir = (post.lang && post.lang === 'ar') ? 'rtl' : 'ltr';
   const lang = post.lang || 'en';
 
@@ -106,7 +106,10 @@ async function generateBlogPostHtml(post, postUrl, templatePath) {
   }
 
   const metaDesc = document.querySelector('meta[name="description"]');
-  if (metaDesc) metaDesc.setAttribute('content', escapeHtml(description));
+  if (metaDesc) {
+    metaDesc.removeAttribute('data-i18n');
+    metaDesc.setAttribute('content', escapeHtml(description));
+  }
 
   const metaKeywords = document.querySelector('meta[name="keywords"]');
   if (metaKeywords) metaKeywords.setAttribute('content', `Amjad Abujamous, software engineer, blog, ${escapeHtml(title)}`);
@@ -184,21 +187,6 @@ function getImageUrl(image, size) {
   }
 
   return image.url || null;
-}
-
-function getLocalImagePath(slug, lang) {
-  const imageFilenames = {
-    'claude-is-awesome': 'claude-is-awesome.jpg',
-    'take-your-productivity-to-the-next-level': 'take-your-productivity-to-the-next-level.jpg',
-    'كتاب-لكل-موظف-وكل-إداري': 'kitab-li-kull-mowathif-wa-kull-idari.jpg'
-  };
-
-  const filename = imageFilenames[slug];
-  if (filename) {
-    return `/images/blog/${filename}`;
-  }
-
-  return null;
 }
 
 function escapeHtml(text) {
