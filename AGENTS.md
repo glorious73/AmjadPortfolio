@@ -97,7 +97,7 @@ npm run preview  # Preview production build locally
 
 **Internationalization:**
 - Add `data-i18n="key.path"` attributes to all translatable elements
-- i18n system handles: inputs/textarea (placeholder), meta tags (content), anchors (href for email/phone, text for social), other elements (textContent)
+- i18n system handles: inputs/textarea (placeholder), meta tags (content), anchors (href for email, text for social), other elements (textContent)
 
 **Accessibility:**
 - Include ARIA attributes for interactive elements: `aria-expanded`, `aria-hidden`, `aria-busy`

@@ -135,7 +135,7 @@
       "title": "Contact",
       "description": "You're welcome to reach out to me for collaboration, consulting, academic research, and software development.",
       "email": "amjadmh73@gmail.com",
-      "phone": "+966 531 577 381",
+      "location": "Riyadh, Saudi Arabia",
       "linkedin": "LinkedIn",
       "github": "GitHub",
       "devto": "Dev.to",
@@ -182,7 +182,6 @@
     "infoDescription": "Feel free to reach out through any of these channels.",
     "info": {
       "emailLabel": "Email",
-      "phoneLabel": "Phone",
       "locationLabel": "Location",
       "location": "Riyadh, Saudi Arabia"
     },

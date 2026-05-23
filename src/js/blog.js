@@ -310,7 +310,7 @@ class BlogManager {
       <article class="blog-card" dir="${dir}">
         <div class="blog-card-header">
           <h3 class="blog-card-title">
-            <a href="/blog/${encodeURIComponent(post.slug)}">${this.escapeHtml(post.title)}</a>
+            <a href="/blog.html?slug=${encodeURIComponent(post.slug)}">${this.escapeHtml(post.title)}</a>
           </h3>
           <span class="blog-card-lang">${post.lang.toUpperCase()}</span>
         </div>
@@ -606,7 +606,7 @@ class BlogManager {
    * Attach social share button listeners
    */
   attachShareListeners() {
-    const pageUrl = encodeURIComponent(`${window.location.origin}/blog/${this.slug}`);
+    const pageUrl = encodeURIComponent(`${window.location.origin}/blog.html?slug=${this.slug}`);
     const pageTitle = encodeURIComponent(document.title);
 
     const whatsappBtn = document.getElementById('whatsapp-share');

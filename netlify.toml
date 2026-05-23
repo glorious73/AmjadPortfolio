@@ -9,12 +9,6 @@
   status = 200
 
 [[redirects]]
-  # Redirect clean blog URLs to pre-rendered HTML files
-  from = "/blog/:slug"
-  to = "/blog/post-:slug.html"
-  status = 200
-
-[[redirects]]
   # Handle blog posts with query parameters (backward compatibility)
   from = "/blog.html"
   to = "/blog.html"

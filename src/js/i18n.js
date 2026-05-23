@@ -17,11 +17,9 @@ function updateTranslations() {
     } else if (element.tagName === 'OPTION') {
       element.textContent = translation;
     } else if (element.tagName === 'A') {
-      // Handle contact links - only update href for email and phone
+      // Handle contact links - update href for email
       if (element.classList.contains('contact-email')) {
         element.href = `mailto:${translation}`;
-      } else if (element.classList.contains('contact-phone')) {
-        element.href = `tel:${translation}`;
       }
       // Social links (linkedin, github, devto, stackoverflow) keep their href, only update text
       element.textContent = translation;

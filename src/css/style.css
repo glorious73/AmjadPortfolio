@@ -496,14 +496,14 @@ button, input[type="submit"], input[type="button"] {
 }
 
 /* Contact icon colors - light theme */
-[data-theme="light"] .icon-phone { color: brown; }
+[data-theme="light"] .icon-location { color: #e74c3c; }
 [data-theme="light"] .icon-linkedin { color: darkblue; }
 [data-theme="light"] .icon-github { color: #333; }
 [data-theme="light"] .icon-devto { color: #000; }
 [data-theme="light"] .icon-stackoverflow { color: orange; }
 
 /* Contact icon colors - dark theme (lighter colors for visibility) */
-[data-theme="dark"] .icon-phone { color: #4ade80; } /* light green */
+[data-theme="dark"] .icon-location { color: #f87171; }
 [data-theme="dark"] .icon-linkedin { color: #60a5fa; } /* light blue */
 [data-theme="dark"] .icon-github,
 [data-theme="dark"] .icon-devto {

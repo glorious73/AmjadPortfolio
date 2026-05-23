@@ -65,7 +65,7 @@ export function blogMetadataGenerator() {
           const slug = post.slug;
           const fileName = `post-${slug}.html`;
           const filePath = path.join(blogDir, fileName);
-          const postUrl = `https://iamamjad.com/blog/${slug}`;
+          const postUrl = `https://iamamjad.com/blog.html?slug=${slug}`;
 
           const html = await generateBlogPostHtml(post, postUrl, blogTemplatePath);
 
